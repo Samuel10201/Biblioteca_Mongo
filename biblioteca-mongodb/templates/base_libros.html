@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block panel_izquierdo %}
+<h2>Libros</h2>
+
+<table>
+    <tr>
+        <th>T&iacute;tulo</th>
+    </tr>
+    {% for libro in libros %}
+    <tr>
+        <td>{{ libro.titulo }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
+
+{% block panel_derecho %}
+<div class="sub-operaciones">
+    <a href="/libros/crear" {% if operacion == "crear" %}class="sub-activa"{% endif %}>Crear</a>
+    <a href="/libros/editar" {% if operacion == "editar" %}class="sub-activa"{% endif %}>Editar</a>
+    <a href="/libros/eliminar" {% if operacion == "eliminar" %}class="sub-activa"{% endif %}>Eliminar</a>
+</div>
+
+{% block formulario %}{% endblock %}
+{% endblock %}

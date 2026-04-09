@@ -1,0 +1,19 @@
+{% extends "base_libros.html" %}
+
+{% block formulario %}
+<h3>Editar Libro</h3>
+
+{% if error %}
+<p class="msg-error">{{ error }}</p>
+{% endif %}
+
+<form method="POST">
+    <label>T&iacute;tulo actual:</label>
+    <input type="text" name="titulo_actual" value="{{ titulo_actual or '' }}" required>
+
+    <label>Nuevo t&iacute;tulo:</label>
+    <input type="text" name="titulo_nuevo" value="{{ titulo_nuevo or '' }}" required>
+
+    <button type="submit">Actualizar</button>
+</form>
+{% endblock %}

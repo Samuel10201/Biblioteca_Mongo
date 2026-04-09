@@ -1,0 +1,24 @@
+{% extends "base_autores.html" %}
+
+{% block formulario %}
+<!--
+    <form> agrupa botones <button> y entradas <input>, method='GET'
+    es el metodo HTTP usado, lo que hace es poner los valores
+    de input en la URL destino (action="/autores") acompanado
+    del name puesto en input (name="busqueda)", para hacer una
+    busqueda filtrada.
+-->
+<form method="GET" action="/autores">
+    <label>Buscar por nombre:</label>
+    <!--
+        type="text" indica el tipo de entrada esperada, name="busqueda" es
+        el nombre con el que viaja el dato (en la URL), mas o menos asi
+        se veria:/autores?busqueda=lo_que_escribio. value="{{busqueda}}" es
+        el valor que se le da al input inicialmente, se pone asi para
+        que el usuario vea lo ultimo que busco. placeholder="" es lo que
+        va en gris en el campo de input cuando esta vacio.
+    -->
+    <input type="text" name="busqueda" value="{{ busqueda }}" placeholder="Nombre del autor...">
+    <button type="submit">Buscar</button>
+</form>
+{% endblock %}

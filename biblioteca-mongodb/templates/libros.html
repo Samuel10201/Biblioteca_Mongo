@@ -1,0 +1,9 @@
+{% extends "base_libros.html" %}
+
+{% block formulario %}
+<form method="GET" action="/libros">
+    <label>Buscar por t&iacute;tulo:</label>
+    <input type="text" name="busqueda" value="{{ busqueda }}" placeholder="T&iacute;tulo del libro...">
+    <button type="submit">Buscar</button>
+</form>
+{% endblock %}

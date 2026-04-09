@@ -1,0 +1,26 @@
+{% extends "base_usuarios.html" %}
+
+{% block formulario %}
+<h3>Editar Usuario</h3>
+
+{% if error %}
+<p class="msg-error">{{ error }}</p>
+{% endif %}
+
+<form method="GET" action="/usuarios/editar">
+    <label>RUT del usuario:</label>
+    <input type="text" name="rut" value="{{ rut or '' }}" required>
+    <button type="submit">Buscar</button>
+</form>
+
+{% if usuario %}
+<form method="POST">
+    <input type="hidden" name="rut" value="{{ rut }}">
+
+    <label>Nuevo nombre:</label>
+    <input type="text" name="nombre_nuevo" value="{{ usuario.nombre }}" required>
+
+    <button type="submit">Actualizar</button>
+</form>
+{% endif %}
+{% endblock %}

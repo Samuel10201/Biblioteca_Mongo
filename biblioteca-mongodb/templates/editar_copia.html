@@ -1,0 +1,30 @@
+{% extends "base_copias.html" %}
+
+{% block formulario %}
+<h3>Editar Copia</h3>
+
+{% if error %}
+<p class="msg-error">{{ error }}</p>
+{% endif %}
+
+<form method="GET" action="/copias/editar">
+    <label>ISBN de la edici&oacute;n:</label>
+    <input type="text" name="isbn" value="{{ isbn or '' }}" required>
+
+    <label>N&uacute;mero actual:</label>
+    <input type="number" name="numero_actual" value="{{ numero_actual or '' }}" required>
+    <button type="submit">Buscar</button>
+</form>
+
+{% if copia %}
+<form method="POST">
+    <input type="hidden" name="isbn" value="{{ isbn }}">
+    <input type="hidden" name="numero_actual" value="{{ copia.numero }}">
+
+    <label>Nuevo n&uacute;mero:</label>
+    <input type="number" name="numero_nuevo" value="{{ copia.numero }}" required>
+
+    <button type="submit">Actualizar</button>
+</form>
+{% endif %}
+{% endblock %}

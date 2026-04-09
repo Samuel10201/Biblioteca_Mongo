@@ -1,0 +1,18 @@
+{% extends "base_ediciones.html" %}
+
+{% block formulario %}
+<h3>Eliminar Edici&oacute;n</h3>
+
+{% if error %}
+<p class="msg-error">{{ error }}</p>
+{% endif %}
+
+<p class="msg-aviso">Al eliminar una edici&oacute;n se eliminan sus copias. Si el libro queda sin ediciones, tambi&eacute;n se elimina.</p>
+
+<form method="POST">
+    <label>ISBN:</label>
+    <input type="text" name="isbn" value="{{ isbn or '' }}" required>
+
+    <button type="submit">Eliminar</button>
+</form>
+{% endblock %}

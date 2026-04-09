@@ -1,0 +1,28 @@
+{% extends "base_ediciones.html" %}
+
+{% block formulario %}
+<h3>Crear Edici&oacute;n</h3>
+
+{% if error %}
+<p class="msg-error">{{ error }}</p>
+{% endif %}
+
+<form method="POST">
+    <label>T&iacute;tulo del libro:</label>
+    <input type="text" name="libro_titulo" value="{{ libro_titulo or '' }}" required>
+
+    <label>ISBN:</label>
+    <input type="text" name="isbn" value="{{ isbn or '' }}" required>
+
+    <label>A&ntilde;o:</label>
+    <input type="number" name="anio" value="{{ anio or '' }}" required>
+
+    <label>Idioma:</label>
+    <input type="text" name="idioma" value="{{ idioma or '' }}" required>
+
+    <label>N&uacute;mero de copia:</label>
+    <input type="number" name="numero" value="{{ numero or '' }}" required>
+
+    <button type="submit">Crear</button>
+</form>
+{% endblock %}

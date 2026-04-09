@@ -1,0 +1,32 @@
+{% extends "base_ediciones.html" %}
+
+{% block formulario %}
+<h3>Editar Edici&oacute;n</h3>
+
+{% if error %}
+<p class="msg-error">{{ error }}</p>
+{% endif %}
+
+<form method="GET" action="/ediciones/editar">
+    <label>ISBN actual:</label>
+    <input type="text" name="isbn_actual" value="{{ isbn_actual or '' }}" required>
+    <button type="submit">Buscar</button>
+</form>
+
+{% if edicion %}
+<form method="POST">
+    <input type="hidden" name="isbn_actual" value="{{ isbn_actual }}">
+
+    <label>Nuevo ISBN:</label>
+    <input type="text" name="isbn" value="{{ edicion.isbn }}" required>
+
+    <label>A&ntilde;o:</label>
+    <input type="number" name="anio" value="{{ edicion.año }}" required>
+
+    <label>Idioma:</label>
+    <input type="text" name="idioma" value="{{ edicion.idioma }}" required>
+
+    <button type="submit">Actualizar</button>
+</form>
+{% endif %}
+{% endblock %}

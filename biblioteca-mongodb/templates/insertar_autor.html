@@ -1,0 +1,49 @@
+{% extends "base_autores.html" %}
+
+{% block formulario %}
+<h3>Crear Autor</h3>
+
+{% if error %}
+<p class="msg-error">{{ error }}</p>
+{% endif %}
+
+{% if libros_faltantes %}
+<p class="msg-aviso">Los siguientes libros no existen en la colecci&oacute;n:
+    {% for t in libros_faltantes %}"{{ t }}"{% if not loop.last %}, {% endif %}{% endfor %}.
+    Complete los datos para crearlos, o corrija los t&iacute;tulos y env&iacute;e nuevamente.
+</p>
+{% endif %}
+
+<form method="POST">
+    <label>Nombre del autor:</label>
+    <input type="text" name="nombre" value="{{ nombre or '' }}" required>
+
+    <label>T&iacute;tulos de libros (separados por coma):</label>
+    <input type="text" name="titulos" value="{{ titulos_texto or '' }}" required>
+
+    {% if libros_faltantes %}
+    <input type="hidden" name="crear_libros" value="1">
+
+    {% for titulo_faltante in libros_faltantes %}
+    <h4>Datos para "{{ titulo_faltante }}"</h4>
+    <input type="hidden" name="titulo_faltante_{{ loop.index0 }}" value="{{ titulo_faltante }}">
+
+    <label>ISBN:</label>
+    <input type="text" name="isbn_{{ loop.index0 }}" required>
+
+    <label>A&ntilde;o:</label>
+    <input type="number" name="anio_{{ loop.index0 }}" required>
+
+    <label>Idioma:</label>
+    <input type="text" name="idioma_{{ loop.index0 }}" required>
+
+    <label>N&uacute;mero de copia:</label>
+    <input type="number" name="numero_{{ loop.index0 }}" required>
+    {% endfor %}
+
+    <input type="hidden" name="num_faltantes" value="{{ libros_faltantes|length }}">
+    {% endif %}
+
+    <button type="submit">Crear</button>
+</form>
+{% endblock %}

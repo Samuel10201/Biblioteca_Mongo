@@ -1,0 +1,379 @@
+/* 
+    <body> es la etiqueta usada para el contenido completo de la pagina,
+    aca se define el estilo de la letra, los espacios respecto a los bordes
+    de la pantalla y el color de fondo de la pagina en general.
+*/
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+/*
+    <nav> es la etiqueta del navegador, aca se define el color de la barra de
+    navegacion, el espacio entre su contenido y los bordes (padding 12px arriba
+    y abajo y 20px por los costados), que se muestre horizontal (display flex),
+    el espacio entre cada opcion del navegador (gap: 16px), que se muevan los 
+    enlaces a una segunda fila en caso de no caber en la pantalla en lugar de
+    desbordarse (flew-wrap: wrap), y hace que esten centrados (align-items: center)
+*/
+nav {
+    background-color: #2c3e50;
+    padding: 12px 20px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/*
+    Estiliza todos los enlaces dentro de <nav>. Primero le pone colo blanco para
+    cambiar el color azul que traen por defecto (color:white), luego le quita el
+    subrayado que trae por defecto (text-decoration:none), agrega espacio entre
+    el texto y su contenedor para que la zona para poder hace clic sea mas 
+    grande (padding: 6px 12px), y se le redondean las esquinas del contenedor
+    (border-redius: 4px). 
+*/
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+
+/* 
+    Esta es una etiqueta especial, el estilo se aplica solo cuando el cursor se 
+    pone encima de las etiquetas de enlace en navegador. Lo que hace es simple,
+    cambia el color para que se note la opcion que se elegira (background-color:)
+*/
+nav a:hover {
+    background-color: #3d566e;
+}
+
+/*
+    Esta es la clase usada para la opcion del navegador de inicio. Esta en 
+    negrita para que destaque como el titulo del sitio (font-weight: bold),
+    un 10% mas grande que el tamano fuente del element padre (font-size: 1.1em),
+    que en este caso es <nav> (16px). Se separa tambien un poco mas de lo normal
+    del primer enlace (margin-right: 20px).
+*/
+.nav-titulo {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-right: 20px;
+}
+
+/*
+    Se usa al estar en una opcion del navegador principal. Lo que hace es que 
+    pone de otro color el fondo de la opcion que se acaba de elegir 
+    (background-color:) y pone una linea azul continua con grosor de 2px
+    (border-bottom: 2px solid ...). 
+*/
+.nav-activo {
+    background-color: #1a252f;
+    border-bottom: 2px solid #3498db;
+}
+
+
+/*
+    Es el navegador mini de los formularios para agregar/editar/eliminar un 
+    elemento de las bases de datos autor/libro/edicion/copia. Usa propiedades 
+    que ya se explicaron arriba.
+*/
+.sub-pestanas {
+    background-color: #34495e;
+    padding: 8px 20px;
+    display: flex;
+    gap: 8px;
+}
+
+/*
+    Usa la misma logica que las etiquetas de direccion del navegador.
+*/
+.sub-pestanas a {
+    color: #bdc3c7;
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 4px;
+}
+
+/*
+    Usa la misma logica que las etiquetas de direccion del navegador.
+*/
+.sub-pestanas a:hover {
+    color: white;
+    background-color: #4a6580;
+}
+
+/*
+    Usa la misma logica que las etiquetas de direccion del navegador. Lo unico
+    destacable es el !important, que es necesario pq la regla .sub-pestanas a
+    es mas especifica que .sub-activa (por el simple hecho de que tiene mas elementos
+    involucrados, entonces !important le da mas peso a este.
+*/
+.sub-activa {
+    background-color: #2c3e50;
+    color: white !important;
+}
+
+/*
+    El <main> por default ocupa todo el ancho de la pantalla, pero la idea es que
+    tenga un tope (max-width:1200px), y que en caso de tener una pantalla con un 
+    ancho mayor a ese entonces que se centre con auto, eso hace que el espacio
+    entre el contenedor del <main> y los bordes izquierdos y derechos sea el
+    mismo. Se pone un padding de 20px a los lados para que el texto no quede 
+    pegado a los bordes de la pantalla.
+*/
+main {
+    margin: 20px auto;
+    padding: 0 20px;
+    max-width: 1200px;
+}
+
+/*
+    Contiene el panel de tabla y panel de formulario. Es necesario para definir
+    que van lado a lado (display:flex) y que tengan espacio entre ellos (gap:20px)
+*/
+.contenedor-paneles {
+    display: flex;
+    gap: 20px;
+}
+
+/*
+    El panel de la tabla ocupara el 55% de la pantalla (flex 55). Por defecto,
+    min-width es auto, pero aqui es un problema, ya que le esta diciendo al 
+    contenedor que SIEMPRE tiene que ser o mas grande o igual que su contenido.
+    Cuando el contenido es menor o igual no hay problema, se conserva la proporcion
+    de 55% del contenedor padre, el problema viene cuando el contenido es
+    mayor que el contenedor (55% del ancho), ahi el contenedor se ajusta al 
+    contenido y empieza a hacerse mas grande, cambiando las proporciones con las 
+    que se trabaja. Para evitar esto se usa min-width:0, para que el contenedor
+    deje de incrementar en funsion de su contenido. En caso de que el contenido
+    sea mayor al contenedor entonces aparecera un scroll abajo (overflow:auto).
+*/
+.panel-izquierdo {
+    flex: 55;
+    min-width: 0;
+    overflow: auto;
+}
+
+/*
+    Misma logica de arriba
+*/
+.panel-derecho {
+    flex: 45;
+    min-width: 0;
+}
+
+/*
+    Color para el titulos
+*/
+h1 {
+    color: #2c3e50;
+}
+
+/*
+    border-collapse:collapse hace que los bordes de las celdas que se definen
+    en el bloque de abajo no se sobrepongan entre ellos.
+*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    margin-top: 16px;
+}
+
+/*
+    Afecta a kas celdas de contenido y encabezado de la tabla. Les pone borde. 
+*/
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #2c3e50;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f0f0f0;
+}
+
+/*
+    Aplica para todos los formularios.
+*/
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 0;
+}
+
+/*
+    Para los campos de formulario.
+*/
+label {
+    display: block;
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+/*
+    Para los inputs de los formularios. El ancho ocupa todo el formulario,
+    espacio para que el texto no quede pegado al borde (padding), espacio entre
+    titulo de input y barra de input (margin-top). Se usa box-sizing:border-box
+    para que al calcular el ancho del input no se pase del ancho disponible. 
+*/
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/*
+    define el boton para enviar el formulario. cursor:pointer hace que el cursor
+    se convierta en una manita al pasarlo por encima del boton.
+*/
+button {
+    margin-top: 16px;
+    padding: 10px 24px;
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3d566e;
+}
+
+
+.sub-operaciones {
+    background-color: #34495e;
+    padding: 8px 20px;
+    display: flex;
+    gap: 8px;
+    border-radius: 0;
+    margin-top: 68px;
+}
+
+.sub-operaciones a {
+    color: #bdc3c7;
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 4px;
+}
+
+.sub-operaciones a:hover {
+    color: white;
+    background-color: #4a6580;
+}
+
+.sub-operaciones .sub-activa {
+    background-color: #2c3e50;
+    color: white !important;
+}
+
+.msg-error {
+    color: #c0392b;
+    font-weight: bold;
+    background-color: #fdecea;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.msg-aviso {
+    color: #856404;
+    font-weight: bold;
+    background-color: #fff3cd;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.inicio {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.inicio-subtitulo {
+    color: #7f8c8d;
+    font-size: 1.1em;
+    margin-bottom: 24px;
+}
+
+.inicio-seccion {
+    margin-bottom: 24px;
+}
+
+.inicio-seccion h3 {
+    color: #2c3e50;
+    border-top: 2px solid #3498db;
+    border-bottom: 2px solid #3498db;
+    padding: 6px 0;
+    margin-bottom: 12px;
+}
+
+.inicio-seccion ul {
+    padding-left: 20px;
+    line-height: 1.8;
+}
+
+.inicio-dos-columnas {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 24px;
+}
+
+.inicio-dos-columnas .inicio-seccion {
+    margin-bottom: 0;
+    flex: 1;
+}
+
+.inicio-cadena {
+    background-color: #2c3e50;
+    color: white;
+    padding: 14px 20px;
+    text-align: center;
+    font-size: 1.2em;
+    font-family: monospace;
+    letter-spacing: 2px;
+}
+
+.resumen-tarjetas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.tarjeta {
+    background-color: #2c3e50;
+    color: white;
+    text-decoration: none;
+    padding: 20px 30px;
+    text-align: center;
+    flex: 1;
+    min-width: 120px;
+}
+
+.tarjeta:hover {
+    background-color: #34495e;
+}
+
+.tarjeta-numero {
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.tarjeta-nombre {
+    display: block;
+    margin-top: 4px;
+    color: #bdc3c7;
+}

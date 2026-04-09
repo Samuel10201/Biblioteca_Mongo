@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block panel_izquierdo %}
+<h2>Usuarios</h2>
+
+<table>
+    <tr>
+        <th>RUT</th>
+        <th>Nombre</th>
+    </tr>
+    {% for usuario in usuarios %}
+    <tr>
+        <td>{{ usuario.rut }}</td>
+        <td>{{ usuario.nombre }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
+
+{% block panel_derecho %}
+<div class="sub-operaciones">
+    <a href="/usuarios/crear" {% if operacion == "crear" %}class="sub-activa"{% endif %}>Crear</a>
+    <a href="/usuarios/editar" {% if operacion == "editar" %}class="sub-activa"{% endif %}>Editar</a>
+    <a href="/usuarios/eliminar" {% if operacion == "eliminar" %}class="sub-activa"{% endif %}>Eliminar</a>
+</div>
+
+{% block formulario %}{% endblock %}
+{% endblock %}

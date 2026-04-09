@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block panel_izquierdo %}
+<h2>Ediciones</h2>
+
+<table>
+    <tr>
+        <th>ISBN</th>
+        <th>A&ntilde;o</th>
+        <th>Idioma</th>
+        <th>Libro</th>
+    </tr>
+    {% for edicion in ediciones %}
+    <tr>
+        <td>{{ edicion.isbn }}</td>
+        <td>{{ edicion.año }}</td>
+        <td>{{ edicion.idioma }}</td>
+        <td>{{ edicion.libro_titulo }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
+
+{% block panel_derecho %}
+<div class="sub-operaciones">
+    <a href="/ediciones/crear" {% if operacion == "crear" %}class="sub-activa"{% endif %}>Crear</a>
+    <a href="/ediciones/editar" {% if operacion == "editar" %}class="sub-activa"{% endif %}>Editar</a>
+    <a href="/ediciones/eliminar" {% if operacion == "eliminar" %}class="sub-activa"{% endif %}>Eliminar</a>
+</div>
+
+{% block formulario %}{% endblock %}
+{% endblock %}

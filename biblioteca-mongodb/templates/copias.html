@@ -1,0 +1,9 @@
+{% extends "base_copias.html" %}
+
+{% block formulario %}
+<form method="GET" action="/copias">
+    <label>Buscar por ISBN:</label>
+    <input type="text" name="busqueda" value="{{ busqueda }}" placeholder="ISBN de la copia...">
+    <button type="submit">Buscar</button>
+</form>
+{% endblock %}

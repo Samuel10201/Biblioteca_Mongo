@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block panel_izquierdo %}
+<h2>Autores</h2>
+
+<table>
+    <tr>
+        <th>Nombre</th>
+    </tr>
+    {% for autor in autores %}
+    <tr>
+        <td>{{ autor.nombre }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
+
+{% block panel_derecho %}
+<div class="sub-operaciones">
+    <a href="/autores/crear" {% if operacion == "crear" %}class="sub-activa"{% endif %}>Crear</a>
+    <a href="/autores/editar" {% if operacion == "editar" %}class="sub-activa"{% endif %}>Editar</a>
+    <a href="/autores/eliminar" {% if operacion == "eliminar" %}class="sub-activa"{% endif %}>Eliminar</a>
+</div>
+
+{% block formulario %}{% endblock %}
+{% endblock %}

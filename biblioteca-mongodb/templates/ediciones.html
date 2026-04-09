@@ -1,0 +1,9 @@
+{% extends "base_ediciones.html" %}
+
+{% block formulario %}
+<form method="GET" action="/ediciones">
+    <label>Buscar por ISBN:</label>
+    <input type="text" name="busqueda" value="{{ busqueda }}" placeholder="ISBN de la edici&oacute;n...">
+    <button type="submit">Buscar</button>
+</form>
+{% endblock %}

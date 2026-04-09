@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<h2>Consulta: Copias con informaci&oacute;n completa</h2>
+
+<p>
+    <a href="/consultas/copias">Copias</a> |
+    <a href="/consultas/prestamos-usuario">Pr&eacute;stamos por usuario</a>
+</p>
+
+<table>
+    <tr>
+        <th>N&uacute;mero</th>
+        <th>ISBN</th>
+        <th>T&iacute;tulo</th>
+        <th>A&ntilde;o</th>
+        <th>Idioma</th>
+        <th>Autores</th>
+    </tr>
+    {% for copia in copias %}
+    <tr>
+        <td>{{ copia.numero }}</td>
+        <td>{{ copia.isbn }}</td>
+        <td>{{ copia.titulo }}</td>
+        <td>{{ copia.año }}</td>
+        <td>{{ copia.idioma }}</td>
+        <td>{{ copia.autores | join(", ") }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base_prestamos.html" %}
+
+{% block formulario %}
+<h3>Crear Pr&eacute;stamo</h3>
+
+{% if error %}
+<p class="msg-error">{{ error }}</p>
+{% endif %}
+
+<form method="POST">
+    <label>ISBN de la copia:</label>
+    <input type="text" name="isbn_copia" value="{{ isbn_copia or '' }}" required>
+
+    <label>N&uacute;mero de copia:</label>
+    <input type="number" name="numero_copia" value="{{ numero_copia or '' }}" required>
+
+    <label>RUT del usuario:</label>
+    <input type="text" name="usuario_rut" value="{{ usuario_rut or '' }}" required>
+
+    <label>Fecha de pr&eacute;stamo:</label>
+    <input type="date" name="fecha_prestamo" value="{{ fecha_prestamo or '' }}" required>
+
+    <label>Fecha de devoluci&oacute;n:</label>
+    <input type="date" name="fecha_devolucion" value="{{ fecha_devolucion or '' }}" required>
+
+    <button type="submit">Crear</button>
+</form>
+{% endblock %}

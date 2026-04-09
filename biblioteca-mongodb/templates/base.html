@@ -1,0 +1,144 @@
+<!-- 
+    Le dice al navegador que este archivo usa HTML5. Sino se incluye,
+    el navegador podría interpretar de formas antiguas e inconsistentes.
+-->
+<!DOCTYPE html>
+
+<!-- 
+    El atributo lang="es" indica que el contenido es en Espanol. Esto
+    ayuda a lectores de pantalla y buscadores.
+-->
+<html lang="es">
+<!-- 
+    <head> contiene info de la página, no es visible en el producto
+    final. 
+-->
+<head>
+    <!-- 
+        Los caracteres se procesaran como UTF-8 (sistema de codificacion
+        de caracteres), que soporta tildes y otros caracteres especiales.
+        De no incluirse, se veria roto el resultado final. 
+    -->
+    <meta charset="UTF-8">
+    <!-- 
+        name="viewport" indica que lo que se describirá en la etiqueta
+        como mostrar la info en diferentes tamanos de pantalla.
+        content="width=device-width" hace que el ancho de la pantalla
+        se ajuste al ancho de la pantalla.
+        initial-scale=1.0 hace que el zoom por default al abrir la página
+        sea de 100%.
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Texto en la pestaña del navegador -->
+    <title>Biblioteca MongoDB</title>
+    <!-- 
+        rel="stylesheet" le indica al navegador que es una hoja de 
+        estilo lo que va a procesar.
+        href="" es la ruta donde se encuentra la hoja de estilos
+        url_for() es un método de Flask para encontrar urls. Sirve
+        para otras cosas, pero en este caso se usa su funcion de 
+        'static', que es el nombre de la carpeta donde guarda sus
+        archivos de estilo, y filename= es el nombre del archivo de
+        estilo a usar. Esto genera algo como /static/style.css . Es 
+        mejor esto que hardcodear la ruta, pq en caso de un cambio de
+        estructura del proyecto, la ruta se sigue encontrando.
+    -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<!-- Contenido visible -->
+<body>
+    <!-- 
+    <nav> es la etiqueta para barras de navegacion. Esto ayuda a los
+    lectores de pantalla identificar la seccion que se esta leyendo, y
+    deja saber que su contenido son ENLACES de navegacion.
+    -->
+    <nav>
+        {#
+            <a> es la etiqueta para enlaces.
+            <a href=""> es la direccion a la que lleva el enlace, se
+            pone la direccion de Flask definida en app.py a la que se
+            quiere llegar.
+            class="nav-activo" es una clase creada en la hoja de estilos
+            "style.css", que sirve para subrayar el elemento del navegador
+            en el que se esta en el momento.
+            if seccion == "catalogo" es un condicional. En app.py, donde
+            se renderiza el html que usa base.html como base, de alguna forma
+            se debe saber cual opcion del menu subrayar, esto se consigue con
+            la variable seccion, que se pasa al renderizar con el valor correspondiente
+            a la opcion del menu elegida.
+            &oacute& y &eacute& es la forma de tildar en HTML.
+        #}
+            
+        <a href="/" class="nav-titulo">Biblioteca MongoDB</a> 
+        <a href="/autores" {% if seccion == "catalogo" %}class="nav-activo"{% endif %}>Autor/Libro/Edici&oacute;n/Copia</a>
+        <a href="/usuarios" {% if seccion == "usuarios" %}class="nav-activo"{% endif %}>Usuario</a>
+        <a href="/prestamos" {% if seccion == "prestamos" %}class="nav-activo"{% endif %}>Pr&eacute;stamo</a>
+        <a href="/consultas/copias" {% if seccion == "consultas" %}class="nav-activo"{% endif %}>Consultas</a>
+    </nav>
+    <!-- 
+        Es el submenu que se muestra al elegir 
+        autores/libros/ediciones/copias. Para que se muestre solo en este
+        escenario se usa el condicional. La logica usada aqui es la misma
+        que la del navegador.
+        En class="sub-pestanas" va el estilo para que se vean como opciones
+        del submenu.
+    -->
+    {% if seccion == "catalogo" %}
+    <div class="sub-pestanas">
+        <a href="/autores" {% if sub == "autores" %}class="sub-activa"{% endif %}>Autores</a>
+        <a href="/libros" {% if sub == "libros" %}class="sub-activa"{% endif %}>Libros</a>
+        <a href="/ediciones" {% if sub == "ediciones" %}class="sub-activa"{% endif %}>Ediciones</a>
+        <a href="/copias" {% if sub == "copias" %}class="sub-activa"{% endif %}>Copias</a>
+    </div>
+    {% endif %}
+
+    {#
+        <main> tiene el contenido principal de la pagina.
+        class="contenedor-paneles" lo explica el nombre. En style.css
+        se tiene el estilo para ponerlos lado a lado.
+        class="panel-izquierdo" define el estilo para mostrar la
+        tabla y "panel-derecho" para los formularios.
+        block panel_izquierdo/endblock es la forma de dejar
+        definido un bloque de codigo que varia dependiendo del .html
+        que usa a base.html, de esta forma cada .html puede definir su
+        contenido, y puede poner la tabla y formulario correspondiente.
+        La forma de implementar la logica en cada .html se hace asi:
+
+        extends "base.html"
+        block panel_izquierdo
+            <h2>Crear Autor</h2>
+        endblock
+
+        block panel_derecho
+            <h2>Lista de Autores</h2>
+        endblock
+    #}
+    <main>
+        {% block contenido %}
+        <div class="contenedor-paneles">
+            <div class="panel-izquierdo">
+                {% block panel_izquierdo %}{% endblock %}
+            </div>
+            <div class="panel-derecho">
+                {% block panel_derecho %}
+                {% block formulario %}{% endblock %}
+                {% endblock %}
+            </div>
+        </div>
+        {% endblock %}
+    </main>
+</body>
+</html>
+
+<!-- 
+    La idea de este html es ser la base de todos los html usados en
+    el proyecto, ya que se encarga de mostrar el menu superior y monta
+    el esquema de todo html a usar. Nunca se renderiza directamente
+    desde app.py, sino que hace parte de todos los html que si se 
+    renderizan de forma directa en app.py. Como dice su nombre, es la
+    base.
+
+    Esta hecho para que sirva como base para todo html, por eso el uso
+    de condicionales, para que al renderizar el html principal (autor
+    por ejemplo) se personalice subrayando la seleccion actual.
+-->

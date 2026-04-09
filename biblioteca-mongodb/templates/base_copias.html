@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block panel_izquierdo %}
+<h2>Copias</h2>
+
+<table>
+    <tr>
+        <th>N&uacute;mero</th>
+        <th>ISBN</th>
+    </tr>
+    {% for copia in copias %}
+    <tr>
+        <td>{{ copia.numero }}</td>
+        <td>{{ copia.isbn }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
+
+{% block panel_derecho %}
+<div class="sub-operaciones">
+    <a href="/copias/crear" {% if operacion == "crear" %}class="sub-activa"{% endif %}>Crear</a>
+    <a href="/copias/editar" {% if operacion == "editar" %}class="sub-activa"{% endif %}>Editar</a>
+    <a href="/copias/eliminar" {% if operacion == "eliminar" %}class="sub-activa"{% endif %}>Eliminar</a>
+</div>
+
+{% block formulario %}{% endblock %}
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block panel_izquierdo %}
+<h2>Pr&eacute;stamos</h2>
+
+<table>
+    <tr>
+        <th>ISBN Copia</th>
+        <th>N&uacute;mero Copia</th>
+        <th>RUT Usuario</th>
+        <th>Fecha Pr&eacute;stamo</th>
+        <th>Fecha Devoluci&oacute;n</th>
+    </tr>
+    {% for prestamo in prestamos %}
+    <tr>
+        <td>{{ prestamo.isbn_copia }}</td>
+        <td>{{ prestamo.numero_copia }}</td>
+        <td>{{ prestamo.usuario_rut }}</td>
+        <td>{{ prestamo.fecha_prestamo }}</td>
+        <td>{{ prestamo.fecha_devolucion }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
+
+{% block panel_derecho %}
+<div class="sub-operaciones">
+    <a href="/prestamos/crear" {% if operacion == "crear" %}class="sub-activa"{% endif %}>Crear</a>
+    <a href="/prestamos/editar" {% if operacion == "editar" %}class="sub-activa"{% endif %}>Editar</a>
+    <a href="/prestamos/eliminar" {% if operacion == "eliminar" %}class="sub-activa"{% endif %}>Eliminar</a>
+</div>
+
+{% block formulario %}{% endblock %}
+{% endblock %}

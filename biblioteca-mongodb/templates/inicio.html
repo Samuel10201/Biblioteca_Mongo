@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<div class="inicio">
+    <h2>Sistema de Gesti&oacute;n de Biblioteca</h2>
+    <p class="inicio-subtitulo">Proyecto de Investigaci&oacute;n Nro. 2 &mdash; Base de datos No Relacional MongoDB</p>
+
+    <div class="inicio-seccion">
+        <h3>Acerca del proyecto</h3>
+        <p>
+            Sistema de informaci&oacute;n para la gesti&oacute;n de una biblioteca, desarrollado con
+            <strong>Python</strong>, <strong>Flask</strong> y <strong>pymongo</strong>, conectado a
+            <strong>MongoDB Atlas</strong>. Permite administrar autores, libros, ediciones, copias,
+            usuarios y pr&eacute;stamos mediante operaciones CRUD completas, adem&aacute;s de consultas
+            con aggregation pipelines.
+        </p>
+    </div>
+
+    <div class="inicio-dos-columnas">
+        <div class="inicio-seccion">
+            <h3>Reglas de creaci&oacute;n</h3>
+            <ul>
+                <li><strong>Autor:</strong> al crearlo se debe asociar al menos un libro. Si el libro no existe, el sistema pregunta si desea crearlo.</li>
+                <li><strong>Libro:</strong> se crea junto con su edici&oacute;n y primera copia. Permite asociar m&uacute;ltiples autores.</li>
+                <li><strong>Edici&oacute;n:</strong> el libro debe existir previamente. Se crea junto con su primera copia.</li>
+                <li><strong>Copia:</strong> la edici&oacute;n (ISBN) debe existir previamente.</li>
+                <li><strong>Pr&eacute;stamo:</strong> la copia y el usuario deben existir previamente.</li>
+            </ul>
+        </div>
+
+        <div class="inicio-seccion">
+            <h3>Reglas de eliminaci&oacute;n</h3>
+            <ul>
+                <li><strong>Autor:</strong> elimina sus parejas en autorea. Los libros que queden sin autores se eliminan en cascada.</li>
+                <li><strong>Libro:</strong> elimina sus ediciones y copias. Los autores que queden sin libros se eliminan.</li>
+                <li><strong>Edici&oacute;n:</strong> elimina sus copias. Si el libro queda sin ediciones, se elimina en cascada.</li>
+                <li><strong>Copia:</strong> solo se elimina la copia. La edici&oacute;n se mantiene aunque quede sin copias.</li>
+                <li><strong>Pr&eacute;stamos:</strong> nunca se eliminan en cascada, son historial del negocio.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="inicio-seccion">
+        <h3>Reglas de actualizaci&oacute;n</h3>
+        <ul>
+            <li>Actualizar el <strong>nombre de un autor</strong> se propaga a la colecci&oacute;n autorea.</li>
+            <li>Actualizar el <strong>t&iacute;tulo de un libro</strong> se propaga a autorea y edici&oacute;n.</li>
+            <li>Actualizar el <strong>ISBN de una edici&oacute;n</strong> se propaga a copia y pr&eacute;stamo.</li>
+            <li>Actualizar el <strong>n&uacute;mero de una copia</strong> se propaga a pr&eacute;stamo.</li>
+            <li>Actualizar <strong>a&ntilde;o o idioma</strong> de una edici&oacute;n no requiere cascada.</li>
+        </ul>
+    </div>
+
+    <div class="inicio-seccion">
+        <h3>Cadena de dependencias</h3>
+        <p class="inicio-cadena">autor &larr; autorea &rarr; libro &larr; edicion &larr; copia &larr; prestamo &rarr; usuario</p>
+    </div>
+</div>
+{% endblock %}

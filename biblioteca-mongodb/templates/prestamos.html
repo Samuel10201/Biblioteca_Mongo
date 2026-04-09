@@ -1,0 +1,9 @@
+{% extends "base_prestamos.html" %}
+
+{% block formulario %}
+<form method="GET" action="/prestamos">
+    <label>Buscar por RUT de usuario:</label>
+    <input type="text" name="busqueda" value="{{ busqueda }}" placeholder="RUT del usuario...">
+    <button type="submit">Buscar</button>
+</form>
+{% endblock %}

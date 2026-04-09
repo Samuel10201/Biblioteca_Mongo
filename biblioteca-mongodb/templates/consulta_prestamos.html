@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<h2>Consulta: Libros prestados por usuario</h2>
+
+<p>
+    <a href="/consultas/copias">Copias</a> |
+    <a href="/consultas/prestamos-usuario">Pr&eacute;stamos por usuario</a>
+</p>
+
+<form method="GET" action="/consultas/prestamos-usuario">
+    <label>RUT del usuario:</label>
+    <input type="text" name="rut" value="{{ rut or '' }}" required>
+    <button type="submit">Consultar</button>
+</form>
+
+{% if resultados %}
+<table>
+    <tr>
+        <th>T&iacute;tulo</th>
+        <th>ISBN Copia</th>
+        <th>N&uacute;mero Copia</th>
+        <th>Fecha Pr&eacute;stamo</th>
+        <th>Fecha Devoluci&oacute;n</th>
+    </tr>
+    {% for r in resultados %}
+    <tr>
+        <td>{{ r.titulo }}</td>
+        <td>{{ r.isbn_copia }}</td>
+        <td>{{ r.numero_copia }}</td>
+        <td>{{ r.fecha_prestamo }}</td>
+        <td>{{ r.fecha_devolucion }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+{% endblock %}

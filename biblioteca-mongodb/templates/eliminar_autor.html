@@ -1,0 +1,18 @@
+{% extends "base_autores.html" %}
+
+{% block formulario %}
+<h3>Eliminar Autor</h3>
+
+{% if error %}
+<p class="msg-error">{{ error }}</p>
+{% endif %}
+
+<p class="msg-aviso">Al eliminar un autor se eliminan sus libros hu&eacute;rfanos, ediciones y copias asociadas.</p>
+
+<form method="POST">
+    <label>Nombre del autor:</label>
+    <input type="text" name="nombre" value="{{ nombre or '' }}" required>
+
+    <button type="submit">Eliminar</button>
+</form>
+{% endblock %}
